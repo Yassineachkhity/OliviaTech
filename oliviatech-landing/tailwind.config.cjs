@@ -1,0 +1,131 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: "class",
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        olive: {
+          50: '#f7f7f0',
+          100: '#ececd8',
+          200: '#d9d9b5',
+          300: '#c0c08a',
+          400: '#a8a866',
+          500: '#8b8b4a',
+          600: '#6d6d3a',
+          700: '#555530',
+          800: '#464629',
+          900: '#3d3d26',
+        },
+        teal: {
+          50: '#f0fdfa',
+          100: '#ccfbf1',
+          200: '#99f6e4',
+          300: '#5eead4',
+          400: '#2dd4bf',
+          500: '#14b8a6',
+          600: '#0d9488',
+          700: '#0f766e',
+          800: '#115e59',
+          900: '#134e4a',
+        },
+        sage: {
+          50: '#f2f7f4',
+          100: '#dfeee6',
+          200: '#c4dfcf',
+          300: '#9ec9b0',
+          400: '#79b393',
+          500: '#589b78',
+          600: '#447b60',
+          700: '#396350',
+          800: '#315143',
+          900: '#283f35',
+        },
+        sand: {
+          50: '#fdfaf5',
+          100: '#f7f0e1',
+          200: '#efe0c2',
+          300: '#e1c28f',
+          400: '#d4a564',
+          500: '#bf7f3a',
+          600: '#a2622b',
+          700: '#854c23',
+          800: '#6b3d1e',
+          900: '#58331b',
+        },
+        ink: {
+          50: '#f6f7fb',
+          100: '#e4e7ec',
+          200: '#c8ccd7',
+          300: '#a0a8b8',
+          400: '#748197',
+          500: '#586279',
+          600: '#424963',
+          700: '#343a4f',
+          800: '#292f40',
+          900: '#1f2433',
+        },
+      },
+      backgroundImage: {
+        'radial-soft': 'radial-gradient(ellipse at top, rgba(139, 139, 74, 0.05), transparent 50%)',
+        'beam-diagonal': 'linear-gradient(130deg, rgba(20,184,166,0.12), transparent 55%)',
+        'grid-light': 'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
+      },
+      boxShadow: {
+        'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+        'xl': '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+        'glow': '0 10px 40px rgba(20, 184, 166, 0.25)',
+        'inner-card': 'inset 0 1px 0 rgba(255,255,255,0.4)',
+      },
+      screens: {
+        'xs': '475px',
+      },
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'gradient-slow': 'gradientShift 14s ease infinite',
+        'shine': 'shine 3s ease-in-out infinite',
+        'pulse-soft': 'pulseSoft 4s ease-in-out infinite',
+        'fade-up': 'fadeUp 0.9s ease forwards',
+        'star-movement-bottom': 'star-movement-bottom linear infinite alternate',
+        'star-movement-top': 'star-movement-top linear infinite alternate',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        gradientShift: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+        shine: {
+          '0%': { transform: 'translateX(-100%)' },
+          '60%': { transform: 'translateX(120%)' },
+          '100%': { transform: 'translateX(120%)' },
+        },
+        pulseSoft: {
+          '0%, 100%': { opacity: 0.9, transform: 'scale(1)' },
+          '50%': { opacity: 1, transform: 'scale(1.02)' },
+        },
+        fadeUp: {
+          '0%': { opacity: 0, transform: 'translateY(18px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+        'star-movement-bottom': {
+          '0%': { transform: 'translate(0%, 0%)', opacity: '1' },
+          '100%': { transform: 'translate(-100%, 0%)', opacity: '0' },
+        },
+        'star-movement-top': {
+          '0%': { transform: 'translate(0%, 0%)', opacity: '1' },
+          '100%': { transform: 'translate(100%, 0%)', opacity: '0' },
+        },
+      },
+    },
+  },
+  plugins: [],
+}
+
