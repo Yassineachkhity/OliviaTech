@@ -44,6 +44,7 @@ const Hero: React.FC = () => {
           <div className="space-y-4 overflow-x-auto">
             <div className="inline-block">
               <TextType
+                key={t.hero.headline}
                 as="h1"
                 text={t.hero.headline}
                 className="whitespace-nowrap text-3xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl"
