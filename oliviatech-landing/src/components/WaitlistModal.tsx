@@ -1,4 +1,5 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import type { FormEvent } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "../context/LanguageContext";
 
@@ -21,7 +22,6 @@ const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose }) => {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const button = (e.currentTarget.querySelector('button[type="submit"]') as HTMLButtonElement);
-        const originalText = button.innerText;
         button.innerText = "✓";
         button.disabled = true;
 

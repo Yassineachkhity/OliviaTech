@@ -1,5 +1,4 @@
 import React from "react";
-import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import { useTranslation } from "../context/LanguageContext";
 import OliviatechLogo from "../assets/oliviatech_original.png";
 
