@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "./components/Navbar";
-import IncubatorSection from "./components/IncubatorSection";
 import Hero from "./components/Hero";
 import StatsSection from "./components/StatsSection";
 import SolutionSection from "./components/SolutionSection";
