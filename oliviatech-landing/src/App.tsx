@@ -28,7 +28,6 @@ const App: React.FC = () => {
             <TeamSection />
             <CTASection />
           </main>
-          <IncubatorSection />
           <Footer />
         </div>
       </ThemeProvider>
