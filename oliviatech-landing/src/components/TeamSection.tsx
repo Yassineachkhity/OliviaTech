@@ -5,10 +5,10 @@ import profil1 from "../assets/profil1.jpeg";
 import profil2 from "../assets/profil2.png";
 import ScrollReveal, { TextReveal } from "./ScrollReveal";
 import MagneticButton from "./MagneticButton";
-import { gsap } from "gsap";
+/* import { gsap } from "gsap"; */
 
 const TeamSection: React.FC = () => {
-  const [ref, visible] = useScrollAnimation();
+  const [ref] = useScrollAnimation();
   const { t } = useTranslation();
 
   const members = [

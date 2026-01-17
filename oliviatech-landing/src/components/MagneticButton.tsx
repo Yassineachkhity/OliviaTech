@@ -25,13 +25,14 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({
         const content = contentRef.current;
         if (!magnet || !content) return;
 
-        const handleMouseMove = (e: MouseEvent) => {
+        const handleMouseMove = (e: Event) => {
+            const mouseEvent = e as MouseEvent;
             const rect = magnet.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
 
-            const deltaX = (e.clientX - centerX) * strength;
-            const deltaY = (e.clientY - centerY) * strength;
+            const deltaX = (mouseEvent.clientX - centerX) * strength;
+            const deltaY = (mouseEvent.clientY - centerY) * strength;
 
             gsap.to(magnet, {
                 x: deltaX,
@@ -75,7 +76,7 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({
 
     return (
         <Component
-            ref={magnetRef as React.RefObject<HTMLDivElement>}
+            ref={magnetRef as any}
             className={`magnetic-button ${className}`}
             style={{ willChange: 'transform' }}
             data-cursor-hover

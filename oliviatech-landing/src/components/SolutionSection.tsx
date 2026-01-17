@@ -60,7 +60,7 @@ const GalleryIcon: React.FC<{ className?: string }> = ({ className = "" }) => {
 };
 
 const SolutionSection: React.FC = () => {
-  const [ref, visible] = useScrollAnimation();
+  const [ref] = useScrollAnimation();
   const { t } = useTranslation();
   const dropZoneRef = useRef<HTMLLabelElement>(null);
 

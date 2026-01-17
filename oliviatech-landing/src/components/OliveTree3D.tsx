@@ -1,5 +1,5 @@
 import React, { useRef, useMemo } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, Environment, useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -86,7 +86,7 @@ const LeafCluster: React.FC<{
 // Main tree component
 const OliveTree: React.FC = () => {
     const groupRef = useRef<THREE.Group>(null);
-    const { viewport } = useThree();
+    /* const { viewport } = useThree(); */
 
     // Mouse tracking for tree rotation
     useFrame((state) => {

@@ -7,7 +7,7 @@ import MagneticButton from "./MagneticButton";
 import StarBorder from "./StarBorder";
 
 const PricingSection: React.FC = () => {
-  const [ref, visible] = useScrollAnimation();
+  const [ref] = useScrollAnimation();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
 
