@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import { useTranslation } from "../context/LanguageContext";
 import WaitlistModal from "./WaitlistModal";
+import ScrollReveal from "./ScrollReveal";
+import MagneticButton from "./MagneticButton";
+import StarBorder from "./StarBorder";
 
 const PricingSection: React.FC = () => {
   const [ref, visible] = useScrollAnimation();
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation();
 
   const plans = [
     {
       name: t.pricing.plans.starter.name,
-      price: "$0",
+      price: "0 MAD",
       period: "/month",
       highlight: t.pricing.plans.starter.highlight,
       features: t.pricing.plans.starter.features,
@@ -20,7 +23,7 @@ const PricingSection: React.FC = () => {
     },
     {
       name: t.pricing.plans.proCoop.name,
-      price: "$29.99",
+      price: "300 MAD",
       period: "/month",
       highlight: t.pricing.plans.proCoop.highlight,
       features: t.pricing.plans.proCoop.features,
@@ -40,56 +43,88 @@ const PricingSection: React.FC = () => {
     <section
       id="pricing"
       ref={ref}
-      className={`container-full section-padding reveal ${visible ? "visible" : ""}`}
+      className={`container-full section-padding relative`}
     >
-      <div className="text-center text-primary">
-        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted">
+      <ScrollReveal className="text-center text-primary mb-12">
+        <p className="text-xs font-semibold uppercase tracking-[0.3em] text-muted mb-3">
           {t.pricing.sectionLabel}
         </p>
-        <h2 className="mt-3 text-3xl font-semibold sm:text-4xl lg:text-5xl">
+        <h2 className="text-3xl font-semibold sm:text-4xl lg:text-5xl mb-4">
           {t.pricing.title}
         </h2>
-        <p className="mx-auto mt-4 max-w-3xl text-base text-muted sm:text-lg">
+        <p className="mx-auto max-w-3xl text-base text-muted sm:text-lg">
           {t.pricing.subtitle}
         </p>
-      </div>
+      </ScrollReveal>
 
-      <div className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2">
+      <div className="mx-auto grid max-w-5xl gap-8 sm:grid-cols-2">
         {plans.map((plan, index) => (
-          <div
+          <ScrollReveal
             key={plan.name}
-            className={`relative theme-card rounded-3xl p-6 transition hover:-translate-y-1 ${plan.popular ? "ring-2 ring-accent" : ""
-              } ${index === 1 ? "reveal-delay-1" : ""}`}
+            animation="fadeUp"
+            delay={index * 0.2}
+            className="h-full"
           >
-            {plan.popular && (
-              <span className="absolute -top-3 right-6 rounded-full bg-accent-soft px-3 py-1 text-[11px] font-semibold text-primary">
-                {t.pricing.mostLoved}
-              </span>
-            )}
-            <h3 className="text-xl font-semibold text-primary">{plan.name}</h3>
-            <p className="mt-2 text-xs text-muted">{plan.highlight}</p>
-            <div className="mt-6 flex items-baseline gap-2">
-              <span className="text-4xl font-semibold text-primary">{plan.price}</span>
-              <span className="text-xs text-muted">{plan.period}</span>
-            </div>
-            <ul className="mt-6 space-y-2 text-sm text-muted">
-              {plan.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2">
-                  <span aria-hidden className="mt-1 text-accent">●</span>
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-            <button
-              onClick={() => handleCtaClick(plan.ctaKey)}
-              className={`mt-8 w-full rounded-full px-6 py-3 text-sm font-semibold transition ${plan.popular
-                  ? "bg-accent text-white hover:bg-accent/90"
-                  : "border border-soft-color text-primary hover:border-accent-color"
+            <div
+              className={`relative h-full theme-card rounded-[2rem] p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 flex flex-col ${plan.popular ? "ring-2 ring-accent card-3d" : "border border-soft-color"
                 }`}
             >
-              {plan.cta}
-            </button>
-          </div>
+              {plan.popular && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-1.5 text-xs font-bold text-white shadow-lg">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                    {t.pricing.mostLoved}
+                  </span>
+                </div>
+              )}
+
+              <div className="mb-6">
+                <h3 className="text-xl font-bold text-primary">{plan.name}</h3>
+                <p className="mt-2 text-sm text-muted">{plan.highlight}</p>
+              </div>
+
+              <div className="mb-8 flex items-baseline gap-1">
+                <span className="text-5xl font-bold text-primary tracking-tight">{plan.price}</span>
+                <span className="text-sm font-medium text-muted">{plan.period}</span>
+              </div>
+
+              <div className="flex-grow space-y-4 mb-8">
+                {plan.features.map((feature) => (
+                  <div key={feature} className="flex items-start gap-3">
+                    <div className="mt-1 flex h-5 w-5 items-center justify-center rounded-full bg-accent/10">
+                      <svg className="h-3 w-3 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <span className="text-sm text-primary/80">{feature}</span>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-auto">
+                <MagneticButton strength={0.3} className="w-full">
+                  {plan.popular ? (
+                    <StarBorder
+                      as="button"
+                      color="var((--accent))"
+                      className="w-full rounded-2xl"
+                      speed="4s"
+                      onClick={() => handleCtaClick(plan.ctaKey)}
+                    >
+                      <span className="font-bold">{plan.cta}</span>
+                    </StarBorder>
+                  ) : (
+                    <button
+                      onClick={() => handleCtaClick(plan.ctaKey)}
+                      className="w-full rounded-2xl border border-soft-color bg-surface-muted px-6 py-4 text-sm font-bold text-primary transition-all hover:bg-surface-card hover:border-primary/20"
+                    >
+                      {plan.cta}
+                    </button>
+                  )}
+                </MagneticButton>
+              </div>
+            </div>
+          </ScrollReveal>
         ))}
       </div>
 

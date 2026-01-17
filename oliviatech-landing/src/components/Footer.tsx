@@ -19,8 +19,13 @@ const Footer: React.FC = () => {
         <div className="flex flex-wrap items-center gap-4">
           <span>{t.footer.tagline}</span>
           <span className="hidden sm:inline text-muted">|</span>
-          <a href="mailto:ikhlassejebbar75@gmail.com" className="text-primary">
-            ikhlassejebbar75@gmail.com
+          <a
+            href="https://www.linkedin.com/company/oliviatechcompany"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-primary hover:text-accent transition-colors hidden sm:inline-block"
+          >
+            LinkedIn
           </a>
         </div>
       </div>

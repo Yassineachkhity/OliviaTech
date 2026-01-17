@@ -200,7 +200,7 @@ const translations: Record<Language, Translations> = {
             subtitle: "We're pairing Moroccan field expertise with product rigor to build tech farmers truly use.",
             members: {
                 ikhlasse: { role: "CEO & Founder", desc: "Strategy, partnerships and farmer relations.", focus: "Finance & ops" },
-                yassine: { role: "CTO", desc: "AI models, agronomy data stack, integrations.", focus: "AI & product" },
+                yassine: { role: "CTO", desc: "AI models, agronomy data stack, integrations.", focus: "AI & application developer" },
             },
         },
         cta: {
@@ -320,7 +320,7 @@ const translations: Record<Language, Translations> = {
             subtitle: "Nous combinons l'expertise marocaine du terrain avec la rigueur produit pour créer une technologie que les agriculteurs utilisent vraiment.",
             members: {
                 ikhlasse: { role: "PDG & Fondatrice", desc: "Stratégie, partenariats et relations agriculteurs.", focus: "Finance & opérations" },
-                yassine: { role: "Directeur Technique", desc: "Modèles IA, données agronomiques, intégrations.", focus: "IA & produit" },
+                yassine: { role: "Directeur Technique", desc: "Modèles IA, données agronomiques, intégrations.", focus: "IA & développement" },
             },
         },
         cta: {
@@ -445,7 +445,7 @@ const translations: Record<Language, Translations> = {
         },
         cta: {
             badge: "التسجيل التجريبي مفتوح الآن",
-            title: "هل أنت مستعد لحماية محصول 2025؟",
+            title: "هل أنت مستعد لحماية محصول 2026؟",
             subtitle: "انضم للوصول المبكر للحصول على دعم الإعداد وإدماج فريقك والتنبيهات الأولى بالذكاء الاصطناعي",
             nameLabel: "الاسم الكامل",
             namePlaceholder: "أدخل اسمك الكامل",
