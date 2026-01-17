@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, Suspense } from "react";
+import React, { useEffect, useRef } from "react";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 import { useTranslation } from "../context/LanguageContext";
 import oliviaHero from "../assets/olive_hero2.jpg";

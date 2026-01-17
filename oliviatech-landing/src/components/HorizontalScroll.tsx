@@ -113,7 +113,7 @@ export const ScrollItem: React.FC<ScrollItemProps> = ({
                 opacity: 1,
                 scrollTrigger: {
                     trigger: item,
-                    containerAnimation: ScrollTrigger.getAll().find((t) => t.vars.pin),
+                    containerAnimation: ScrollTrigger.getAll().find((t) => t.vars.pin)?.animation,
                     start: 'left center',
                     end: 'center center',
                     scrub: true,
