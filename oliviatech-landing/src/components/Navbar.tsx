@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
   const links = [
     { href: "#solution", label: t.nav.solution },
     { href: "#pricing", label: t.nav.pricing },
-    { href: "#team", label: t.nav.team },
+    { href: "#cta", label: t.nav.talkToUs },
   ];
 
   return (
