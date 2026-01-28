@@ -5,7 +5,6 @@ import StatsSection from "./components/StatsSection";
 import SolutionSection from "./components/SolutionSection";
 import AdvantageSection from "./components/AdvantageSection";
 import PricingSection from "./components/PricingSection";
-import TeamSection from "./components/TeamSection";
 import CTASection from "./components/CTASection";
 import Footer from "./components/Footer";
 import CustomCursor from "./components/CustomCursor";
@@ -29,7 +28,6 @@ const App: React.FC = () => {
             <StatsSection />
             <SolutionSection />
             <PricingSection />
-            <TeamSection />
             <CTASection />
           </main>
           <Footer />

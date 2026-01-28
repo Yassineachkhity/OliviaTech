@@ -130,7 +130,7 @@ const SolutionSection: React.FC = () => {
                     <span className="text-xl font-medium text-primary mt-2">
                       {t.solution.dropPhoto}
                     </span>
-                    <span className="text-sm text-muted">Supports JPG, PNG</span>
+                    <span className="text-sm text-muted">This Solution is under construction - Supports JPG, PNG</span>
                   </div>
                   <input type="file" disabled className="hidden" />
                 </label>
