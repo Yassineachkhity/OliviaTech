@@ -12,7 +12,7 @@ export interface Translations {
     };
     // Hero
     hero: {
-        badge: string;
+
         headline: string;
         subtitle: string;
         cta: string;
@@ -141,7 +141,7 @@ const translations: Record<Language, Translations> = {
             services: "Services",
         },
         hero: {
-            badge: "92% Accuracy in Disease Detection", // Updated
+
             headline: "Empowering Olive Farmers with AI",
             subtitle: "Instant tree disease detection via OliviaTech Mobile Solution.",
             cta: "Start Protecting Your Grove",
@@ -288,7 +288,7 @@ const translations: Record<Language, Translations> = {
             services: "Services",
         },
         hero: {
-            badge: "Précision de 92% dans la détection", // Updated
+
             headline: "L'IA au service des oléiculteurs",
             subtitle: "Détection instantanée des maladies via l'application mobile OliviaTech.",
             cta: "Protégez votre oliveraie",
@@ -435,7 +435,7 @@ const translations: Record<Language, Translations> = {
             services: "الخدمات",
         },
         hero: {
-            badge: "دقة 92٪ في اكتشاف الأمراض", // Updated
+
             headline: "تمكين مزارعي الزيتون بالذكاء الاصطناعي",
             subtitle: "اكتشاف أمراض الأشجار فوراً عبر تطبيق OliviaTech",
             cta: "ابدأ بحماية بستانك",

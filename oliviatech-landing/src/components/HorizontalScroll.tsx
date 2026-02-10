@@ -19,6 +19,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
     const containerRef = useRef<HTMLDivElement>(null);
     const scrollerRef = useRef<HTMLDivElement>(null);
     const progressRef = useRef<HTMLDivElement>(null);
+    const isRTL = typeof document !== "undefined" && document.documentElement.dir === "rtl";
 
     useEffect(() => {
         const container = containerRef.current;
@@ -26,7 +27,8 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
         const progress = progressRef.current;
         if (!container || !scroller) return;
 
-        const scrollWidth = scroller.scrollWidth - window.innerWidth;
+        const scrollWidth = Math.max(0, scroller.scrollWidth - window.innerWidth);
+        if (scrollWidth === 0) return;
 
         const tl = gsap.timeline({
             scrollTrigger: {
@@ -46,8 +48,9 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
         });
 
         // Progress bar animation
+        let progressTween: gsap.core.Tween | undefined;
         if (progress) {
-            gsap.to(progress, {
+            progressTween = gsap.to(progress, {
                 scaleX: 1,
                 ease: 'none',
                 scrollTrigger: {
@@ -60,7 +63,10 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
         }
 
         return () => {
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+            tl.scrollTrigger?.kill();
+            tl.kill();
+            progressTween?.scrollTrigger?.kill();
+            progressTween?.kill();
         };
     }, [speed, children]);
 
@@ -70,7 +76,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
             <div className="fixed top-0 left-0 right-0 h-1 bg-surface-muted z-50">
                 <div
                     ref={progressRef}
-                    className="h-full bg-accent origin-left"
+                    className={`h-full bg-accent ${isRTL ? "origin-right" : "origin-left"}`}
                     style={{ transform: 'scaleX(0)' }}
                 />
             </div>
@@ -79,6 +85,7 @@ const HorizontalScroll: React.FC<HorizontalScrollProps> = ({
             <div
                 ref={scrollerRef}
                 className="flex items-center h-screen"
+                dir="ltr"
                 style={{ width: 'max-content' }}
             >
                 {children}
@@ -100,12 +107,24 @@ export const ScrollItem: React.FC<ScrollItemProps> = ({
     width = '100vw',
 }) => {
     const itemRef = useRef<HTMLDivElement>(null);
+    const itemDir = typeof document !== "undefined" && document.documentElement.dir === "rtl" ? "rtl" : "ltr";
 
     useEffect(() => {
         const item = itemRef.current;
         if (!item) return;
 
-        gsap.fromTo(
+        const containerTrigger = ScrollTrigger.getAll().find((trigger) => {
+            const triggerElement = trigger.trigger;
+            return Boolean(
+                trigger.vars.pin &&
+                triggerElement instanceof Element &&
+                triggerElement.contains(item)
+            );
+        });
+
+        if (!containerTrigger?.animation) return;
+
+        const tween = gsap.fromTo(
             item,
             { scale: 0.9, opacity: 0.5 },
             {
@@ -113,7 +132,7 @@ export const ScrollItem: React.FC<ScrollItemProps> = ({
                 opacity: 1,
                 scrollTrigger: {
                     trigger: item,
-                    containerAnimation: ScrollTrigger.getAll().find((t) => t.vars.pin)?.animation,
+                    containerAnimation: containerTrigger.animation,
                     start: 'left center',
                     end: 'center center',
                     scrub: true,
@@ -122,14 +141,16 @@ export const ScrollItem: React.FC<ScrollItemProps> = ({
         );
 
         return () => {
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+            tween.scrollTrigger?.kill();
+            tween.kill();
         };
-    }, []);
+    }, [children, className, width]);
 
     return (
         <div
             ref={itemRef}
             className={`flex-shrink-0 flex items-center justify-center ${className}`}
+            dir={itemDir}
             style={{ width }}
         >
             {children}

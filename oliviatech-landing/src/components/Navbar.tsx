@@ -16,6 +16,8 @@ const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { language, setLanguage, t } = useTranslation();
+  const diseaseGuideLabel =
+    language === "fr" ? "Guide Maladies" : language === "ar" ? "دليل الأمراض" : "Disease Guide";
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -36,6 +38,7 @@ const Navbar: React.FC = () => {
     { href: "#services", label: t.nav.services },
     { href: "#solution", label: t.nav.solution },
     { href: "#pricing", label: t.nav.pricing },
+    { href: "/diseaserecognizerguide", label: diseaseGuideLabel },
   ];
 
   return (
@@ -67,7 +70,7 @@ const Navbar: React.FC = () => {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted hover:text-primary transition"
+              className="nav-link-premium text-sm font-medium text-muted hover:text-primary"
             >
               {link.label}
             </a>
@@ -84,7 +87,7 @@ const Navbar: React.FC = () => {
                 setLangOpen(!langOpen);
               }}
               aria-label="Select language"
-              className="inline-flex h-10 items-center justify-center gap-1 rounded-full border border-soft-color bg-surface-card px-3 text-sm font-semibold text-primary transition hover:border-accent-color"
+              className="premium-interaction inline-flex h-10 items-center justify-center gap-1 rounded-full border border-soft-color bg-surface-card px-3 text-sm font-semibold text-primary hover:border-accent-color"
             >
               {languages.find(l => l.code === language)?.label}
               <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -117,7 +120,7 @@ const Navbar: React.FC = () => {
             onClick={toggleTheme}
             aria-label="Toggle color mode"
             aria-pressed={theme === "dark"}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-soft-color bg-surface-card text-primary transition hover:border-accent-color"
+            className="premium-interaction inline-flex h-10 w-10 items-center justify-center rounded-full border border-soft-color bg-surface-card text-primary hover:border-accent-color"
           >
             <span className="sr-only">Switch theme</span>
             <svg
@@ -140,13 +143,13 @@ const Navbar: React.FC = () => {
 
           <a
             href="#cta"
-            className="hidden sm:inline-flex items-center rounded-full border border-strong-color px-4 py-2 text-sm font-semibold text-primary transition hover:border-accent-color"
+            className="premium-interaction hidden sm:inline-flex items-center rounded-full border border-strong-color px-4 py-2 text-sm font-semibold text-primary hover:border-accent-color"
           >
             {t.nav.talkToUs}
           </a>
 
           <button
-            className="inline-flex flex-col items-center justify-center gap-1 rounded-lg border border-soft-color p-2 md:hidden"
+            className="premium-interaction inline-flex flex-col items-center justify-center gap-1 rounded-lg border border-soft-color p-2 md:hidden"
             onClick={() => setOpen((o) => !o)}
             aria-label="Toggle navigation"
             type="button"
@@ -182,7 +185,7 @@ const Navbar: React.FC = () => {
                     key={link.href}
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className="rounded-2xl border border-soft-color px-4 py-3 text-primary"
+                    className="premium-interaction rounded-2xl border border-soft-color px-4 py-3 text-primary"
                   >
                     {link.label}
                   </a>
@@ -190,7 +193,7 @@ const Navbar: React.FC = () => {
                 <a
                   href="#cta"
                   onClick={() => setOpen(false)}
-                  className="rounded-2xl bg-primary/90 px-4 py-3 text-center text-sm font-semibold text-white"
+                  className="premium-interaction rounded-2xl bg-primary/90 px-4 py-3 text-center text-sm font-semibold text-white hover:bg-primary"
                 >
                   {t.nav.talkToUs}
                 </a>

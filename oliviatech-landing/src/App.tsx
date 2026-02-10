@@ -12,30 +12,42 @@ import ProgramsSection from "./components/ProgramsSection";
 import ServicesSection from "./components/ServicesSection";
 import { ThemeProvider } from "./context/ThemeProvider";
 import { LanguageProvider } from "./context/LanguageProvider";
+import DiseaseRecognizerGuidePage from "./pages/DiseaseRecognizerGuidePage";
+
+const isDiseaseGuideRoute = (path: string): boolean => {
+  return /\/diseaserecognizerguide\/?$/i.test(path);
+};
 
 const App: React.FC = () => {
+  const pathname = typeof window !== "undefined" ? window.location.pathname : "/";
+  const renderDiseaseGuide = isDiseaseGuideRoute(pathname);
+
   return (
     <LanguageProvider>
       <ThemeProvider>
-        <div className="app-shell relative min-h-screen overflow-hidden">
-          <div className="app-grid pointer-events-none absolute inset-0 -z-10" aria-hidden />
+        {renderDiseaseGuide ? (
+          <DiseaseRecognizerGuidePage />
+        ) : (
+          <div className="app-shell relative min-h-screen overflow-hidden">
+            <div className="app-grid pointer-events-none absolute inset-0 -z-10" aria-hidden />
 
-          {/* Custom cursor - only visible on desktop */}
-          <CustomCursor />
+            {/* Custom cursor - only visible on desktop */}
+            <CustomCursor />
 
-          <Navbar />
-          <main className="pt-20 sm:pt-24">
-            <Hero />
-            <ServicesSection />
-            <AdvantageSection />
-            <StatsSection />
-            <SolutionSection />
-            <PricingSection />
-            <CTASection />
-            <ProgramsSection />
-          </main>
-          <Footer />
-        </div>
+            <Navbar />
+            <main className="pt-20 sm:pt-24">
+              <Hero />
+              <ServicesSection />
+              <AdvantageSection />
+              <StatsSection />
+              <SolutionSection />
+              <PricingSection />
+              <CTASection />
+              <ProgramsSection />
+            </main>
+            <Footer />
+          </div>
+        )}
       </ThemeProvider>
     </LanguageProvider>
   );

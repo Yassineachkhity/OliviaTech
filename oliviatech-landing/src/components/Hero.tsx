@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
   const [ref, visible] = useScrollAnimation();
   const { t } = useTranslation();
   const contentRef = useRef<HTMLDivElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
+
   const ctaRef = useRef<HTMLDivElement>(null);
   const appBadgesRef = useRef<HTMLDivElement>(null);
 
@@ -21,14 +21,7 @@ const Hero: React.FC = () => {
 
     const tl = gsap.timeline({ delay: 0.2 });
 
-    if (badgeRef.current) {
-      tl.from(badgeRef.current, {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        ease: "power3.out",
-      });
-    }
+
 
     if (ctaRef.current) {
       tl.from(ctaRef.current, {
@@ -80,21 +73,7 @@ const Hero: React.FC = () => {
       {/* Content Container */}
       <div className="container-full relative z-10 flex flex-col justify-center items-center min-h-[80vh] text-center">
         <div ref={contentRef} className="max-w-4xl space-y-8">
-          {/* Badge */}
-          <div
-            ref={badgeRef}
-            className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-md px-4 py-1.5 text-xs font-semibold text-white/90 shadow-lg hover:bg-white/15 transition-all duration-300 mx-auto"
-          >
-            <span className="inline-flex h-5 w-5 items-center justify-center rounded-full">
-              <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" version="1.1" width="20" height="20" viewBox="0 0 256 256" xmlSpace="preserve">
-                <g stroke="none" strokeWidth={0} fill="none" fillRule="nonzero" opacity={1} transform="translate(1.4 1.4) scale(2.81)">
-                  <circle cx="45" cy="45" r="45" fill="rgb(193,39,45)" opacity={1} />
-                  <path d="M 61.999 71.16 L 45 58.811 L 28.002 71.16 l 6.491 -19.98 L 17.5 38.834 h 21.004 L 45 18.84 l 6.496 19.994 H 72.5 L 55.507 51.179 L 61.999 71.16 z" fill="rgb(0,98,51)" opacity={1} />
-                </g>
-              </svg>
-            </span>
-            {t.hero.badge}
-          </div>
+
 
           {/* Main Headline */}
           <div className="space-y-6">
