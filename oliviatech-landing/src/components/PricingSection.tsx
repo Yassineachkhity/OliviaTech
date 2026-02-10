@@ -14,8 +14,8 @@ const PricingSection: React.FC = () => {
   const plans = [
     {
       name: t.pricing.plans.starter.name,
-      price: "0 MAD",
-      period: "/month",
+      price: "Free", // Changed from 0 MAD
+      period: "", // Removed /month
       highlight: t.pricing.plans.starter.highlight,
       features: t.pricing.plans.starter.features,
       cta: t.pricing.plans.starter.cta,
@@ -23,8 +23,8 @@ const PricingSection: React.FC = () => {
     },
     {
       name: t.pricing.plans.proCoop.name,
-      price: "300 MAD",
-      period: "/month",
+      price: "Consulting", // Changed from 300 MAD
+      period: "",
       highlight: t.pricing.plans.proCoop.highlight,
       features: t.pricing.plans.proCoop.features,
       cta: t.pricing.plans.proCoop.cta,

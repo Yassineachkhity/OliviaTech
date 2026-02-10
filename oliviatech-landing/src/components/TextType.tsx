@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, createElement, useMemo, useCallback } from 'react';
+import { useEffect, useRef, useState, createElement, useMemo, useCallback, useId } from 'react';
 import type { ElementType } from 'react';
 
 import { gsap } from 'gsap';
@@ -51,7 +51,8 @@ const TextType = ({
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(!startOnVisible);
   const cursorRef = useRef<HTMLSpanElement>(null);
-  const containerRef = useRef<HTMLElement>(null);
+  const generatedId = useId();
+  const elementId = props.id ?? generatedId;
 
   const textArray = useMemo(() => (Array.isArray(text) ? text : [text]), [text]);
 
@@ -67,7 +68,10 @@ const TextType = ({
   };
 
   useEffect(() => {
-    if (!startOnVisible || !containerRef.current) return;
+    if (!startOnVisible || typeof document === 'undefined') return;
+
+    const element = document.getElementById(elementId);
+    if (!element) return;
 
     const observer = new IntersectionObserver(
       entries => {
@@ -80,9 +84,9 @@ const TextType = ({
       { threshold: 0.1 }
     );
 
-    observer.observe(containerRef.current);
+    observer.observe(element);
     return () => observer.disconnect();
-  }, [startOnVisible]);
+  }, [startOnVisible, elementId]);
 
   useEffect(() => {
     if (showCursor && cursorRef.current) {
@@ -164,7 +168,8 @@ const TextType = ({
     isVisible,
     reverseMode,
     variableSpeed,
-    onSentenceComplete
+    onSentenceComplete,
+    getRandomSpeed
   ]);
 
   const shouldHideCursor =
@@ -173,7 +178,7 @@ const TextType = ({
   return createElement(
     Component,
     {
-      ref: containerRef,
+      id: elementId,
       className: `inline-block tracking-tight ${className}`,
       ...props
     },

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useCallback, useRef, useEffect } from "react";
 import type { ReactNode } from "react";
 import { gsap } from "gsap";
 
@@ -17,8 +17,11 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({
     as: Component = 'div',
     ...props
 }) => {
-    const magnetRef = useRef<HTMLDivElement | HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement>(null);
+    const magnetRef = useRef<HTMLElement | null>(null);
     const contentRef = useRef<HTMLSpanElement>(null);
+    const setMagnetRef = useCallback((node: HTMLElement | null) => {
+        magnetRef.current = node;
+    }, []);
 
     useEffect(() => {
         const magnet = magnetRef.current;
@@ -49,10 +52,27 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({
             });
         };
 
+        const handleMouseDown = () => {
+            gsap.to([magnet, content], {
+                scale: 0.9,
+                duration: 0.2,
+                ease: 'power3.out',
+            });
+        };
+
+        const handleMouseUp = () => {
+            gsap.to([magnet, content], {
+                scale: 1,
+                duration: 0.2,
+                ease: 'elastic.out(1, 0.3)',
+            });
+        };
+
         const handleMouseLeave = () => {
             gsap.to(magnet, {
                 x: 0,
                 y: 0,
+                scale: 1, // Ensure scale resets
                 duration: 0.6,
                 ease: 'elastic.out(1, 0.3)',
             });
@@ -60,6 +80,7 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({
             gsap.to(content, {
                 x: 0,
                 y: 0,
+                scale: 1, // Ensure scale resets
                 duration: 0.6,
                 ease: 'elastic.out(1, 0.3)',
             });
@@ -67,16 +88,20 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({
 
         magnet.addEventListener('mousemove', handleMouseMove);
         magnet.addEventListener('mouseleave', handleMouseLeave);
+        magnet.addEventListener('mousedown', handleMouseDown);
+        magnet.addEventListener('mouseup', handleMouseUp);
 
         return () => {
             magnet.removeEventListener('mousemove', handleMouseMove);
             magnet.removeEventListener('mouseleave', handleMouseLeave);
+            magnet.removeEventListener('mousedown', handleMouseDown);
+            magnet.removeEventListener('mouseup', handleMouseUp);
         };
     }, [strength]);
 
     return (
         <Component
-            ref={magnetRef as any}
+            ref={setMagnetRef}
             className={`magnetic-button ${className}`}
             style={{ willChange: 'transform' }}
             data-cursor-hover

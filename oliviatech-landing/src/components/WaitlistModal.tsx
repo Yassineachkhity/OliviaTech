@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import type { FormEvent } from "react";
 import { createPortal } from "react-dom";
 import { useTranslation } from "../context/LanguageContext";
@@ -9,20 +9,14 @@ interface WaitlistModalProps {
 }
 
 const WaitlistModal: React.FC<WaitlistModalProps> = ({ isOpen, onClose }) => {
-    const [mounted, setMounted] = useState(false);
     const { t } = useTranslation();
-
-    useEffect(() => {
-        setMounted(true);
-        return () => setMounted(false);
-    }, []);
-
-    if (!isOpen || !mounted) return null;
+    const canRender = isOpen && typeof document !== "undefined";
+    if (!canRender) return null;
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const button = (e.currentTarget.querySelector('button[type="submit"]') as HTMLButtonElement);
-        button.innerText = "✓";
+        button.textContent = "\u2713";
         button.disabled = true;
 
         setTimeout(() => {

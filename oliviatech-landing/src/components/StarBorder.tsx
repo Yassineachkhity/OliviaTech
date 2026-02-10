@@ -1,7 +1,7 @@
 import React from 'react';
 
-type StarBorderProps<T extends React.ElementType> = React.ComponentPropsWithoutRef<T> & {
-  as?: T;
+interface StarBorderProps {
+  as?: 'button' | 'a' | 'div' | 'span';
   className?: string;
   children?: React.ReactNode;
   color?: string;
@@ -9,10 +9,11 @@ type StarBorderProps<T extends React.ElementType> = React.ComponentPropsWithoutR
   thickness?: number;
   bgClassName?: string;
   textClassName?: string;
-};
+  [key: string]: unknown;
+}
 
-const StarBorder = <T extends React.ElementType = 'button'>({
-  as,
+const StarBorder: React.FC<StarBorderProps> = ({
+  as: Component = 'button',
   className = '',
   color = 'white',
   speed = '6s',
@@ -21,18 +22,18 @@ const StarBorder = <T extends React.ElementType = 'button'>({
   textClassName,
   children,
   ...rest
-}: StarBorderProps<T>) => {
-  const Component = as || 'button';
+}) => {
   const bgClass = bgClassName || 'bg-accent';
   const textClass = textClassName || 'text-white';
+  const { style, ...restProps } = rest as { style?: React.CSSProperties };
 
   return (
     <Component
       className={`relative inline-block overflow-hidden rounded-[20px] ${className}`}
-      {...(rest as any)}
+      {...(restProps as Record<string, unknown>)}
       style={{
         padding: `${thickness}px 0`,
-        ...(rest as any).style
+        ...(style ?? {})
       }}
     >
       <div

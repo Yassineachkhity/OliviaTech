@@ -8,8 +8,10 @@ import PricingSection from "./components/PricingSection";
 import CTASection from "./components/CTASection";
 import Footer from "./components/Footer";
 import CustomCursor from "./components/CustomCursor";
-import { ThemeProvider } from "./context/ThemeContext";
-import { LanguageProvider } from "./context/LanguageContext";
+import ProgramsSection from "./components/ProgramsSection";
+import ServicesSection from "./components/ServicesSection";
+import { ThemeProvider } from "./context/ThemeProvider";
+import { LanguageProvider } from "./context/LanguageProvider";
 
 const App: React.FC = () => {
   return (
@@ -24,11 +26,13 @@ const App: React.FC = () => {
           <Navbar />
           <main className="pt-20 sm:pt-24">
             <Hero />
+            <ServicesSection />
             <AdvantageSection />
             <StatsSection />
             <SolutionSection />
             <PricingSection />
             <CTASection />
+            <ProgramsSection />
           </main>
           <Footer />
         </div>

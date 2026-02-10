@@ -34,7 +34,7 @@
   * {
     @apply scroll-smooth;
   }
-  
+
   body {
     @apply min-h-screen antialiased;
     overflow-x: hidden;
@@ -43,7 +43,7 @@
     transition: background 0.4s ease, color 0.4s ease;
     font-family: "Inter", "Sora", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
-  
+
   html {
     overflow-x: hidden;
     background: var(--app-bg);
@@ -56,7 +56,7 @@
     transform: translateY(24px) scale(0.98);
     transition: opacity 0.8s cubic-bezier(0.65, 0, 0.35, 1), transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
   }
-  
+
   .reveal.visible {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -77,7 +77,7 @@
   .container-full {
     @apply w-full px-3 sm:px-4 md:px-6 lg:px-8 xl:px-12;
   }
-  
+
   .section-padding {
     @apply py-12 sm:py-16 md:py-20 lg:py-24;
   }
@@ -221,28 +221,36 @@
   0% {
     transform: translateX(-100%);
   }
+
   70% {
     transform: translateX(120%);
   }
+
   100% {
     transform: translateX(120%);
   }
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-15px);
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.5;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.8;
     transform: scale(1.05);
@@ -253,9 +261,11 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
   }
@@ -263,14 +273,12 @@
 
 /* Hero gradient animation */
 .hero-gradient-animate {
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    rgba(79, 227, 160, 0.03) 25%,
-    transparent 50%,
-    rgba(226, 184, 102, 0.03) 75%,
-    transparent 100%
-  );
+  background: linear-gradient(135deg,
+      transparent 0%,
+      rgba(79, 227, 160, 0.03) 25%,
+      transparent 50%,
+      rgba(226, 184, 102, 0.03) 75%,
+      transparent 100%);
   background-size: 400% 400%;
   animation: gradient-shift 15s ease infinite;
 }
@@ -313,12 +321,12 @@
 /* Glow effects */
 .glow-accent {
   box-shadow: 0 0 20px rgba(79, 227, 160, 0.3),
-              0 0 40px rgba(79, 227, 160, 0.1);
+    0 0 40px rgba(79, 227, 160, 0.1);
 }
 
 .glow-accent-hover:hover {
   box-shadow: 0 0 30px rgba(79, 227, 160, 0.4),
-              0 0 60px rgba(79, 227, 160, 0.2);
+    0 0 60px rgba(79, 227, 160, 0.2);
 }
 
 /* Text gradient */
@@ -374,6 +382,7 @@
     opacity: 0;
     transform: scale(0.95);
   }
+
   to {
     filter: blur(0);
     opacity: 1;
@@ -382,23 +391,49 @@
 }
 
 /* Stagger utilities */
-.stagger-1 { animation-delay: 0.1s; }
-.stagger-2 { animation-delay: 0.2s; }
-.stagger-3 { animation-delay: 0.3s; }
-.stagger-4 { animation-delay: 0.4s; }
-.stagger-5 { animation-delay: 0.5s; }
+.stagger-1 {
+  animation-delay: 0.1s;
+}
+
+.stagger-2 {
+  animation-delay: 0.2s;
+}
+
+.stagger-3 {
+  animation-delay: 0.3s;
+}
+
+.stagger-4 {
+  animation-delay: 0.4s;
+}
+
+.stagger-5 {
+  animation-delay: 0.5s;
+}
 
 /* Hide cursor on custom cursor screens */
-@media (min-width: 1024px) {
-  body.custom-cursor-active {
-    cursor: none;
+body.custom-cursor-active [role="button"] {
+  cursor: none;
+}
+
+@layer utilities {
+  .btn-premium-hover {
+    @apply relative overflow-hidden transition-all duration-300;
   }
-  
-  body.custom-cursor-active a,
-  body.custom-cursor-active button,
-  body.custom-cursor-active input,
-  body.custom-cursor-active textarea,
-  body.custom-cursor-active [role="button"] {
-    cursor: none;
+
+  .btn-premium-hover::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+  }
+
+  .btn-premium-hover:hover::before {
+    @apply opacity-100;
+  }
+
+  .btn-premium-hover:hover {
+    @apply shadow-lg;
+    border-color: color-mix(in srgb, var(--accent) 40%, transparent);
+    background-color: color-mix(in srgb, var(--surface-card) 80%, transparent);
   }
 }

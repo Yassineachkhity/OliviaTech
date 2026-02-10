@@ -3,6 +3,24 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
+const createSeededRandom = (seed: number) => {
+    let value = seed;
+    return () => {
+        value += 0x6d2b79f5;
+        let t = value;
+        t = Math.imul(t ^ (t >>> 15), t | 1);
+        t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+};
+
+const seedFromVector = (vector: [number, number, number]) => {
+    return vector.reduce((acc, value, index) => {
+        const scaled = Math.floor((value + 1) * 1000);
+        return acc + scaled * (index + 1) * 1013;
+    }, 0);
+};
+
 // Olive particle component
 const OliveParticle: React.FC<{ position: [number, number, number]; delay: number }> = ({ position, delay }) => {
     const ref = useRef<THREE.Mesh>(null);
@@ -45,25 +63,26 @@ const LeafCluster: React.FC<{
     });
 
     const leaves = useMemo(() => {
+        const rand = createSeededRandom(seedFromVector(position));
         const leafData = [];
         for (let i = 0; i < 12; i++) {
             const angle = (i / 12) * Math.PI * 2;
-            const radius = 0.3 + Math.random() * 0.2;
+            const radius = 0.3 + rand() * 0.2;
             leafData.push({
                 position: [
                     Math.cos(angle) * radius,
-                    Math.random() * 0.3 - 0.15,
+                    rand() * 0.3 - 0.15,
                     Math.sin(angle) * radius,
                 ] as [number, number, number],
                 rotation: [
-                    Math.random() * 0.5,
+                    rand() * 0.5,
                     angle,
-                    Math.random() * 0.3 - 0.15,
+                    rand() * 0.3 - 0.15,
                 ] as [number, number, number],
             });
         }
         return leafData;
-    }, []);
+    }, [position]);
 
     return (
         <group ref={ref} position={position} rotation={rotation} scale={scale}>
@@ -121,15 +140,16 @@ const OliveTree: React.FC = () => {
 
     // Generate olive positions
     const olives = useMemo(() => {
+        const rand = createSeededRandom(0x4f1bbcdc);
         const oliveData = [];
         for (let i = 0; i < 20; i++) {
             oliveData.push({
                 position: [
-                    (Math.random() - 0.5) * 1.2,
-                    0.2 + Math.random() * 0.8,
-                    (Math.random() - 0.5) * 1.2,
+                    (rand() - 0.5) * 1.2,
+                    0.2 + rand() * 0.8,
+                    (rand() - 0.5) * 1.2,
                 ] as [number, number, number],
-                delay: Math.random() * 10,
+                delay: rand() * 10,
             });
         }
         return oliveData;
@@ -191,11 +211,12 @@ const FloatingParticles: React.FC = () => {
     const pointsRef = useRef<THREE.Points>(null);
 
     const particles = useMemo(() => {
+        const rand = createSeededRandom(0x1b873593);
         const positions = new Float32Array(50 * 3);
         for (let i = 0; i < 50; i++) {
-            positions[i * 3] = (Math.random() - 0.5) * 4;
-            positions[i * 3 + 1] = Math.random() * 3 - 0.5;
-            positions[i * 3 + 2] = (Math.random() - 0.5) * 4;
+            positions[i * 3] = (rand() - 0.5) * 4;
+            positions[i * 3 + 1] = rand() * 3 - 0.5;
+            positions[i * 3 + 2] = (rand() - 0.5) * 4;
         }
         return positions;
     }, []);

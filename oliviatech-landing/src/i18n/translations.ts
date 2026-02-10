@@ -8,6 +8,7 @@ export interface Translations {
         team: string;
         talkToUs: string;
         navigate: string;
+        services: string; // New
     };
     // Hero
     hero: {
@@ -33,6 +34,21 @@ export interface Translations {
             meteoAlerts: { title: string; desc: string };
             aiDiagnosis: { title: string; desc: string };
         };
+    };
+    // Services Section (New)
+    services: {
+        sectionLabel: string;
+        title: string;
+        subtitle: string;
+        items: {
+            detection: { title: string; desc: string; cta: string; price?: string };
+            marketplace: { title: string; desc: string; cta: string; price?: string };
+            consulting: { title: string; desc: string; cta: string; price?: string };
+        };
+    };
+    // Programs Section (New)
+    programs: {
+        title: string;
     };
     // Stats Section
     stats: {
@@ -122,9 +138,10 @@ const translations: Record<Language, Translations> = {
             team: "Team",
             talkToUs: "Talk to us",
             navigate: "Navigate",
+            services: "Services",
         },
         hero: {
-            badge: "Trusted by groves across Morocco",
+            badge: "92% Accuracy in Disease Detection", // Updated
             headline: "Empowering Olive Farmers with AI",
             subtitle: "Instant tree disease detection via OliviaTech Mobile Solution.",
             cta: "Start Protecting Your Grove",
@@ -164,6 +181,32 @@ const translations: Record<Language, Translations> = {
                 },
             },
         },
+        services: {
+            sectionLabel: "Our Services",
+            title: "Everything you need for a healthy grove",
+            subtitle: "From detection to treatment, we've got you covered.",
+            items: {
+                detection: {
+                    title: "AI Disease Detection",
+                    desc: "Screen your trees instantly with 92% accuracy. Identify pests and diseases before they spread.",
+                    cta: "Try Detection",
+                    price: "Free",
+                },
+                marketplace: {
+                    title: "Pesticide Marketplace",
+                    desc: "Buy the right treatments directly from the app. Connected with trusted suppliers.",
+                    cta: "Shop Treatments",
+                },
+                consulting: {
+                    title: "Expert Consulting",
+                    desc: "Get personalized advice from certified agronomists for complex issues.",
+                    cta: "Book Expert",
+                },
+            },
+        },
+        programs: {
+            title: "Supported By",
+        },
         stats: {
             yieldProtected: { label: "Yield protected", detail: "Estimated losses avoided in pilots" },
             support: { label: "Support", detail: "On-demand assistant in Arabic & French & English" },
@@ -177,20 +220,20 @@ const translations: Record<Language, Translations> = {
         pricing: {
             sectionLabel: "Pricing",
             title: "Transparent plans that grow with every grove.",
-            subtitle: "No hardware upsells or hidden fees. Upgrade only when you need expert back-up.",
+            subtitle: "No hidden fees. Basic detection is always free.",
             mostLoved: "Most loved",
             plans: {
                 starter: {
-                    name: "Starter",
-                    highlight: "Ideal for single-grove farmers testing OliviaTech.",
-                    features: ["3 photo diagnoses", "Basic treatment guidance", "Community Q&A access"],
-                    cta: "Create free account",
+                    name: "Basic",
+                    highlight: "Essential tools for every farmer.",
+                    features: ["Unlimited AI Diagnoses", "Marketplace Access", "Community Support"],
+                    cta: "Start for Free",
                 },
                 proCoop: {
-                    name: "Pro coop",
-                    highlight: "Unlimited detections for co-ops and agronomists.",
-                    features: ["Unlimited diagnoses", "Custom playbooks & exports", "Priority agronomist support"],
-                    cta: "Join waitlist",
+                    name: "Premium",
+                    highlight: "For professional management and advice.",
+                    features: ["Expert Agronomist Access", "Advanced Reports", "Priority Support"],
+                    cta: "Join Waitlist",
                 },
             },
         },
@@ -242,9 +285,10 @@ const translations: Record<Language, Translations> = {
             team: "Équipe",
             talkToUs: "Nous contacter",
             navigate: "Navigation",
+            services: "Services",
         },
         hero: {
-            badge: "Approuvé par les oliveraies du Maroc",
+            badge: "Précision de 92% dans la détection", // Updated
             headline: "L'IA au service des oléiculteurs",
             subtitle: "Détection instantanée des maladies via l'application mobile OliviaTech.",
             cta: "Protégez votre oliveraie",
@@ -284,6 +328,32 @@ const translations: Record<Language, Translations> = {
                 },
             },
         },
+        services: {
+            sectionLabel: "Nos Services",
+            title: "Tout pour une oliveraie saine",
+            subtitle: "De la détection au traitement, nous sommes là pour vous.",
+            items: {
+                detection: {
+                    title: "Détection IA",
+                    desc: "Analysez vos arbres instantanément avec 92% de précision. Identifiez les ravageurs avant qu'ils ne se propagent.",
+                    cta: "Essayer la détection",
+                    price: "Gratuit",
+                },
+                marketplace: {
+                    title: "Marché de Pesticides",
+                    desc: "Achetez les bons traitements directement depuis l'application. Connecté avec des fournisseurs de confiance.",
+                    cta: "Acheter des traitements",
+                },
+                consulting: {
+                    title: "Consulting Expert",
+                    desc: "Obtenez des conseils personnalisés d'agronomes certifiés pour des problèmes complexes.",
+                    cta: "Réserver un expert",
+                },
+            },
+        },
+        programs: {
+            title: "Soutenus Par",
+        },
         stats: {
             yieldProtected: { label: "Rendement protégé", detail: "Pertes évitées estimées dans les pilotes" },
             support: { label: "Support", detail: "Assistant disponible en arabe, français et anglais" },
@@ -297,19 +367,19 @@ const translations: Record<Language, Translations> = {
         pricing: {
             sectionLabel: "Tarifs",
             title: "Des forfaits transparents qui grandissent avec chaque oliveraie.",
-            subtitle: "Pas de vente de matériel ni de frais cachés. Passez à la version supérieure uniquement quand vous avez besoin d'un expert.",
+            subtitle: "Pas de frais cachés. La détection de base est toujours gratuite.",
             mostLoved: "Le plus populaire",
             plans: {
                 starter: {
-                    name: "Débutant",
-                    highlight: "Idéal pour les agriculteurs testant OliviaTech.",
-                    features: ["3 diagnostics photo", "Conseils de traitement de base", "Accès à la communauté Q&R"],
-                    cta: "Créer un compte gratuit",
+                    name: "Basique",
+                    highlight: "Outils essentiels pour tout agriculteur.",
+                    features: ["Diagnostics IA illimités", "Accès au marché", "Support communautaire"],
+                    cta: "Commencer gratuitement",
                 },
                 proCoop: {
-                    name: "Pro coop",
-                    highlight: "Détections illimitées pour coopératives et agronomes.",
-                    features: ["Diagnostics illimités", "Guides personnalisés et exports", "Support agronome prioritaire"],
+                    name: "Premium",
+                    highlight: "Pour une gestion et des conseils professionnels.",
+                    features: ["Accès Agronome Expert", "Rapports avancés", "Support prioritaire"],
                     cta: "Rejoindre la liste d'attente",
                 },
             },
@@ -362,9 +432,10 @@ const translations: Record<Language, Translations> = {
             team: "الفريق",
             talkToUs: "تواصل معنا",
             navigate: "التنقل",
+            services: "الخدمات",
         },
         hero: {
-            badge: "موثوق به من بساتين الزيتون في المغرب",
+            badge: "دقة 92٪ في اكتشاف الأمراض", // Updated
             headline: "تمكين مزارعي الزيتون بالذكاء الاصطناعي",
             subtitle: "اكتشاف أمراض الأشجار فوراً عبر تطبيق OliviaTech",
             cta: "ابدأ بحماية بستانك",
@@ -404,6 +475,32 @@ const translations: Record<Language, Translations> = {
                 },
             },
         },
+        services: {
+            sectionLabel: "خدماتنا",
+            title: "كل ما تحتاجه لبستان سليم",
+            subtitle: "من الكشف إلى العلاج، نحن نغطي احتياجاتك.",
+            items: {
+                detection: {
+                    title: "الكشف بالذكاء الاصطناعي",
+                    desc: "افحص أشجارك فوراً بدقة 92٪. حدد الآفات والأمراض قبل انتشارها.",
+                    cta: "جرب الكشف",
+                    price: "مجاني",
+                },
+                marketplace: {
+                    title: "سوق المبيدات",
+                    desc: "اشترِ العلاجات المناسبة مباشرة من التطبيق. متصل بموردين موثوقين.",
+                    cta: "تسوق العلاجات",
+                },
+                consulting: {
+                    title: "استشارات الخبراء",
+                    desc: "احصل على نصائح مخصصة من مهندسين زراعيين معتمدين للمشاكل المعقدة.",
+                    cta: "احجز خبيراً",
+                },
+            },
+        },
+        programs: {
+            title: "بدعم من",
+        },
         stats: {
             yieldProtected: { label: "المحصول المحمي", detail: "الخسائر المتجنبة المقدرة في التجارب" },
             support: { label: "الدعم", detail: "مساعد متاح بالعربية والفرنسية والإنجليزية" },
@@ -417,19 +514,19 @@ const translations: Record<Language, Translations> = {
         pricing: {
             sectionLabel: "الأسعار",
             title: "خطط شفافة تنمو مع كل بستان",
-            subtitle: "لا توجد رسوم خفية. قم بالترقية فقط عندما تحتاج إلى دعم خبير",
+            subtitle: "لا توجد رسوم خفية. الكشف الأساسي مجاني دائماً.",
             mostLoved: "الأكثر شعبية",
             plans: {
                 starter: {
-                    name: "المبتدئ",
-                    highlight: "مثالي للمزارعين الذين يختبرون OliviaTech",
-                    features: ["3 تشخيصات بالصور", "إرشادات العلاج الأساسية", "الوصول إلى مجتمع الأسئلة والأجوبة"],
-                    cta: "إنشاء حساب مجاني",
+                    name: "الأساسي",
+                    highlight: "أدوات أساسية لكل مزارع.",
+                    features: ["تشخيصات ذكاء اصطناعي غير محدودة", "الوصول إلى المتجر", "دعم المجتمع"],
+                    cta: "ابدأ مجاناً",
                 },
                 proCoop: {
-                    name: "التعاونية المحترفة",
-                    highlight: "اكتشافات غير محدودة للتعاونيات والمهندسين الزراعيين",
-                    features: ["تشخيصات غير محدودة", "أدلة مخصصة وتصدير", "دعم أولوية من المهندسين الزراعيين"],
+                    name: "المميز",
+                    highlight: "للإدارة والنصائح الاحترافية.",
+                    features: ["الوصول إلى خبير زراعي", "تقارير متقدمة", "دعم ذو أولوية"],
                     cta: "انضم لقائمة الانتظار",
                 },
             },

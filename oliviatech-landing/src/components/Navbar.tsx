@@ -33,16 +33,16 @@ const Navbar: React.FC = () => {
   }, [langOpen]);
 
   const links = [
+    { href: "#services", label: t.nav.services },
     { href: "#solution", label: t.nav.solution },
     { href: "#pricing", label: t.nav.pricing },
-    { href: "#cta", label: t.nav.talkToUs },
   ];
 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 border-b border-soft-color transition-colors duration-300 ${scrolled
-          ? "bg-surface-card backdrop-blur-xl shadow-soft"
-          : "bg-surface-muted backdrop-blur"
+        ? "bg-surface-card backdrop-blur-xl shadow-soft"
+        : "bg-surface-muted backdrop-blur"
         }`}
     >
       <nav className="container-full flex h-20 items-center justify-between gap-4">
