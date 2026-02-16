@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { ThemeContext, type Theme } from "./ThemeContext";
+import { safeLocalStorageGet, safeLocalStorageSet, safeMatchMedia } from "../utils/browser";
 
 const STORAGE_KEY = "oliviatech-theme";
 
@@ -11,11 +12,11 @@ const getInitialTheme = (): Theme => {
   if (typeof window === "undefined") {
     return "light";
   }
-  const stored = window.localStorage.getItem(STORAGE_KEY) as Theme | null;
+  const stored = safeLocalStorageGet(STORAGE_KEY) as Theme | null;
   if (stored === "light" || stored === "dark") {
     return stored;
   }
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const prefersDark = safeMatchMedia("(prefers-color-scheme: dark)");
   return prefersDark ? "dark" : "light";
 };
 
@@ -29,7 +30,7 @@ export const ThemeProvider: React.FC<ProviderProps> = ({ children }) => {
     const root = document.documentElement;
     root.dataset.theme = theme;
     root.classList.toggle("dark", theme === "dark");
-    window.localStorage.setItem(STORAGE_KEY, theme);
+    safeLocalStorageSet(STORAGE_KEY, theme);
   }, [theme]);
 
   const toggleTheme = () => {

@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import translations from "../i18n/translations";
 import type { Language } from "../i18n/translations";
 import { LanguageContext } from "./LanguageContext";
+import { safeLocalStorageGet, safeLocalStorageSet, safeNavigatorLanguage } from "../utils/browser";
 
 const STORAGE_KEY = "oliviatech-language";
 
@@ -13,11 +14,11 @@ const getInitialLanguage = (): Language => {
   if (typeof window === "undefined") {
     return "en";
   }
-  const stored = window.localStorage.getItem(STORAGE_KEY) as Language | null;
+  const stored = safeLocalStorageGet(STORAGE_KEY) as Language | null;
   if (stored === "en" || stored === "fr" || stored === "ar") {
     return stored;
   }
-  const browserLang = navigator.language.toLowerCase();
+  const browserLang = safeNavigatorLanguage();
   if (browserLang.startsWith("fr")) return "fr";
   if (browserLang.startsWith("ar")) return "ar";
   return "en";
@@ -36,7 +37,7 @@ export const LanguageProvider: React.FC<ProviderProps> = ({ children }) => {
     root.dir = isRTL ? "rtl" : "ltr";
     root.lang = language;
 
-    window.localStorage.setItem(STORAGE_KEY, language);
+    safeLocalStorageSet(STORAGE_KEY, language);
   }, [language]);
 
   const value = useMemo(
